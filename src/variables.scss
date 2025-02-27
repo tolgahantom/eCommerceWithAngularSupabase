@@ -1,0 +1,18 @@
+:root {
+  --bg-color: #f1f1f0;
+  --gray-font-color: #8f8f8f;
+  --font-color: #111111;
+  --border-color: rgb(221, 221, 221);
+}
+
+.main-button {
+  background-color: #212529;
+  padding: 8px 16px;
+  color: #fff;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
