@@ -19,5 +19,103 @@
       color: var(--gray-font-color);
       margin-bottom: 16px;
     }
+
+    .new-products {
+      margin-top: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 80px;
+
+      .new-product {
+        &:hover .prd-image {
+          scale: (0.95);
+        }
+        &:hover .prd-image img {
+          scale: (1.1);
+        }
+        .prd-image {
+          width: 400px;
+          height: 500px;
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 0.3s ease-in-out;
+          margin-bottom: 25px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+
+        .prd-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          .prd-title {
+            font-weight: normal;
+            text-transform: uppercase;
+            font-size: 25px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            position: relative;
+
+            &:hover::before {
+              width: 100%;
+            }
+
+            &::before {
+              transition: 0.3s ease-in-out;
+
+              content: "";
+              position: absolute;
+              bottom: -5px;
+              left: 0;
+              width: 0;
+              height: 2px;
+              background-color: var(--font-color);
+            }
+          }
+
+          .prd-desc {
+            color: var(--gray-font-color);
+            width: 90%;
+            margin-bottom: 12px;
+          }
+
+          .discover {
+            text-transform: uppercase;
+            font-size: 17px;
+            position: relative;
+            cursor: pointer;
+
+            &:hover::after {
+              width: 100%;
+            }
+
+            &::before,
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: -5px;
+              left: 0;
+              width: 100%;
+              height: 2px;
+              background-color: var(--gray-font-color);
+              z-index: 2;
+            }
+
+            &::after {
+              z-index: 3;
+              background-color: var(--font-color);
+              width: 0%;
+              transition: all 0.3s ease-in-out;
+            }
+          }
+        }
+      }
+    }
   }
 }
