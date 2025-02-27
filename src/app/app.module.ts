@@ -3,11 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { Router } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { NewCollectionComponent } from './component/new-collection/new-collection.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, NewCollectionComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })

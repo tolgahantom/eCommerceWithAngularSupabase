@@ -12,7 +12,19 @@
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1300px;
   width: 100%;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    max-width: 540px;
+  }
 }
