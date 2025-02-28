@@ -34,9 +34,44 @@
   </ul>
   <div class="personal">
     <div class="wish">Wishlist(0)</div>
-    <div class="cart">Cart(0)</div>
+    <div class="cart" (click)="cartIsOpen = !cartIsOpen">Cart(0)</div>
     <div class="search">
       <i class="fa-solid fa-magnifying-glass"></i>
     </div>
+  </div>
+</div>
+
+<div
+  class="cart-container"
+  [ngClass]="{ open: cartIsOpen }"
+  (click)="cartIsOpen = !cartIsOpen"
+>
+  <div class="cart-content" (click)="$event.stopPropagation()">
+    <i class="fa-solid fa-xmark" (click)="cartIsOpen = !cartIsOpen"></i>
+    <div class="top">
+      <span class="title">Sepetin</span>
+      <span class="count">3</span>
+    </div>
+    <div class="card-list">
+      <div class="card-item">
+        <span class="card-item-title">Lorem ipsum</span>
+        <span> <i class="fa-solid fa-turkish-lira-sign"></i>122</span>
+      </div>
+      <div class="card-item">
+        <span class="card-item-title">Lorem ipsum</span>
+        <span> <i class="fa-solid fa-turkish-lira-sign"></i>122</span>
+      </div>
+      <div class="card-item">
+        <span class="card-item-title">Lorem ipsum</span>
+        <span> <i class="fa-solid fa-turkish-lira-sign"></i>122</span>
+      </div>
+    </div>
+    <div class="total">
+      <span>Toplam(TL)</span>
+      <span><i class="fa-solid fa-turkish-lira-sign"></i>300</span>
+    </div>
+    <button class="main-button" style="background-color: var(--green-color)">
+      Ödemeye Devam Et
+    </button>
   </div>
 </div>

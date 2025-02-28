@@ -71,3 +71,113 @@
     }
   }
 }
+
+.cart-container {
+  z-index: 100;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease-in-out;
+
+  &.open {
+    display: block;
+  }
+
+  &.open .cart-content {
+    right: 0px;
+  }
+
+  .cart-content {
+    position: absolute;
+    right: -400px;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+    padding: 16px;
+    gap: 25px;
+    display: flex;
+    flex-direction: column;
+
+    .fa-xmark {
+      display: block;
+      width: 100%;
+      color: var(--green-color);
+      font-size: 35px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--font-color);
+      padding-bottom: 10px;
+      .title {
+        font-size: 25px;
+      }
+      .count {
+        background-color: var(--green-color);
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+    }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .card-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-style: italic;
+
+        i {
+          font-size: 13px;
+        }
+
+        span:last-child {
+          font-style: normal;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--green-color);
+      font-weight: bold;
+      padding-top: 15px;
+      border-top: 1px solid var(--green-color);
+    }
+
+    button {
+      transition: all 0.3s ease-in-out;
+      background-color: var(--green-color);
+
+      &:hover {
+        &:hover {
+          box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}
