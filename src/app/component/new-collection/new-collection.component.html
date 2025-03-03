@@ -10,13 +10,16 @@
       optio ipsum sequi. Quis enim illo hic blanditiis, alias, eos facilis
       quaerat dolor harum, similique repellat.
     </div>
-    <div class="new-products animate__animated animate__fadeInUp">
-      <div class="new-product">
+    <swiper-container
+      class="new-products"
+      navigation="true"
+      loop="true"
+      [slidesPerView]="3"
+    >
+      @for( item of slides; track $index){
+      <swiper-slide class="new-product">
         <div class="prd-image">
-          <img
-            src="https://themewagon.github.io/kaira/images/banner-image-3.jpg"
-            alt=""
-          />
+          <img [src]="item.image" />
         </div>
         <div class="prd-content">
           <h2 class="prd-title">Soft Leather Jackets</h2>
@@ -26,39 +29,8 @@
           </p>
           <div class="discover">Discover Now</div>
         </div>
-      </div>
-      <div class="new-product">
-        <div class="prd-image">
-          <img
-            src="https://themewagon.github.io/kaira/images/banner-image-1.jpg"
-            alt=""
-          />
-        </div>
-        <div class="prd-content">
-          <h2 class="prd-title">Soft Leather Jackets</h2>
-          <p class="prd-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
-            maiores.
-          </p>
-          <div class="discover">Daha fazlası</div>
-        </div>
-      </div>
-      <div class="new-product">
-        <div class="prd-image">
-          <img
-            src="https://themewagon.github.io/kaira/images/banner-image-2.jpg"
-            alt=""
-          />
-        </div>
-        <div class="prd-content">
-          <h2 class="prd-title">Soft Leather Jackets</h2>
-          <p class="prd-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
-            maiores.
-          </p>
-          <div class="discover">Discover Now</div>
-        </div>
-      </div>
-    </div>
+      </swiper-slide>
+      }
+    </swiper-container>
   </div>
 </div>

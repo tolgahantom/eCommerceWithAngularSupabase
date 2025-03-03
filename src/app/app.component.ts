@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import AOS from 'aos';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +6,6 @@ import AOS from 'aos';
   styleUrl: './app.component.scss',
   standalone: false,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'eCommerceWithAngularSupabase';
-
-  ngOnInit(): void {
-    AOS.init({ once: true });
-  }
 }
