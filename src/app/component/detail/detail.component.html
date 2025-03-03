@@ -2,21 +2,14 @@
   <div class="product-image-side">
     <div class="product-image-selector">
       <div class="main-product-image">
-        <img src="https://picsum.photos/500" />
+        <img [src]="productImages[selectedIndex].image" />
       </div>
       <div class="image-photos">
+        @for (photo of productImages; track $index) {
         <div class="image-photo">
-          <img src="https://picsum.photos/500" />
+          <img [src]="photo.image" (click)="changeMainImage($index)" />
         </div>
-        <div class="image-photo">
-          <img src="https://picsum.photos/500" />
-        </div>
-        <div class="image-photo">
-          <img src="https://picsum.photos/500" />
-        </div>
-        <div class="image-photo">
-          <img src="https://picsum.photos/500" />
-        </div>
+        }
       </div>
     </div>
     <div class="product-buttons">
@@ -29,10 +22,10 @@
         </button>
       </div>
       <div>
-        <button class="product-button">
+        <button class="product-button" (click)="prevImage()">
           <i class="fa-solid fa-angle-left"></i>
         </button>
-        <button class="product-button">
+        <button class="product-button" (click)="nextImage()">
           <i class="fa-solid fa-angle-right"></i>
         </button>
       </div>
