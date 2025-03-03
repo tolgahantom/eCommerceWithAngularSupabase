@@ -8,6 +8,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { CategoriesComponent } from './component/categories/categories.component';
 import { MostSellComponent } from './component/most-sell/most-sell.component';
 import { register } from 'swiper/element/bundle';
+import { ProductsComponent } from './pages/products/products.component';
+import { LeftBarComponent } from './shared/left-bar/left-bar.component';
+import { ProductListComponent } from './component/product-list/product-list.component';
 
 register();
 
@@ -19,6 +22,9 @@ register();
     NewCollectionComponent,
     CategoriesComponent,
     MostSellComponent,
+    ProductsComponent,
+    LeftBarComponent,
+    ProductListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

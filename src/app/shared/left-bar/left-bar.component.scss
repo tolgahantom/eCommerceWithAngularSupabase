@@ -1,0 +1,52 @@
+.main {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  min-height: 100vh;
+  padding-top: 30px;
+
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--gray-font-color);
+    margin-bottom: 25px;
+
+    .logo-image {
+      width: 55px;
+      height: 55px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .brand-text {
+      font-size: 25px;
+    }
+  }
+
+  .categories {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+
+    .category {
+      position: relative;
+      left: 0;
+      background-color: var(--green-color);
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      padding: 25px;
+      border-radius: 15px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        left: 25px;
+      }
+    }
+  }
+}
