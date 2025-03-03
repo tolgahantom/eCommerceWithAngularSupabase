@@ -11,6 +11,8 @@ import { register } from 'swiper/element/bundle';
 import { ProductsComponent } from './pages/products/products.component';
 import { LeftBarComponent } from './shared/left-bar/left-bar.component';
 import { ProductListComponent } from './component/product-list/product-list.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { DetailComponent } from './component/detail/detail.component';
 
 register();
 
@@ -25,6 +27,8 @@ register();
     ProductsComponent,
     LeftBarComponent,
     ProductListComponent,
+    ProductDetailComponent,
+    DetailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
