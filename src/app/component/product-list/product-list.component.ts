@@ -10,11 +10,21 @@ import { ProductModel } from '../../models/product-model';
 })
 export class ProductListComponent implements OnInit {
   productList: ProductModel[] = [];
+  public productPerPage: number = 12;
+  public selectedPage: number = 1;
+  numberOfPage: number = 3;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productList = this.productService.getAllProduct();
+    this.loadBlogs();
+  }
+
+  loadBlogs() {
+    this.productList = this.productService.getAllProduct(
+      this.selectedPage,
+      this.productPerPage
+    );
   }
 
   getStars(rating: number): string[] {
@@ -33,5 +43,19 @@ export class ProductListComponent implements OnInit {
 
   getDiscountPrice(price: number, discount: number) {
     return Math.round(price * (1 - discount / 100));
+  }
+
+  changePage(page: number): void {
+    this.selectedPage = page;
+    this.loadBlogs();
+    window.scrollTo(0, 0);
+  }
+
+  getPageArray() {
+    return Array(
+      Math.ceil(this.productService.getBlogCount() / this.productPerPage)
+    )
+      .fill(0)
+      .map((a, i) => i + 1);
   }
 }

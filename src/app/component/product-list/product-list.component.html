@@ -35,4 +35,18 @@
     </div>
     }
   </div>
+
+  <div class="pagination">
+    <div class="pageNumbers">
+      @for (item of getPageArray(); track $index) {
+      <button
+        class="pageNumber"
+        (click)="changePage(item)"
+        [ngClass]="this.selectedPage === item ? 'active' : ''"
+      >
+        {{ item }}
+      </button>
+      }
+    </div>
+  </div>
 </div>

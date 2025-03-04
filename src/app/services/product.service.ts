@@ -198,11 +198,18 @@ export class ProductService {
 
   constructor() {}
 
-  getAllProduct() {
-    return this.ProductList;
+  getAllProduct(page: number, productsPerPage: number) {
+    const startIndex = (page - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage - 1;
+
+    return this.ProductList.slice(startIndex, endIndex);
   }
 
   getProductById(id: string) {
     return this.ProductList[+id - 1];
+  }
+
+  getBlogCount() {
+    return this.ProductList.length;
   }
 }
