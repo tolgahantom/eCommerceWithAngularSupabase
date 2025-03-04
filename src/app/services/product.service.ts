@@ -201,4 +201,8 @@ export class ProductService {
   getAllProduct() {
     return this.ProductList;
   }
+
+  getProductById(id: string) {
+    return this.ProductList[+id - 1];
+  }
 }

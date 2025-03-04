@@ -1,7 +1,7 @@
 <div class="main">
   <div class="products-list">
     @for (prd of productList; track $index) {
-    <div class="product-card">
+    <div class="product-card" [routerLink]="['/product', prd.id]">
       <div class="card-image">
         <i class="fa-solid fa-heart"></i>
         <img src="https://picsum.photos/500" />

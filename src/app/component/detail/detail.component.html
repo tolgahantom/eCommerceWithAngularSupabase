@@ -2,12 +2,14 @@
   <div class="product-image-side">
     <div class="product-image-selector">
       <div class="main-product-image">
-        <img [src]="productImages[selectedIndex].image" />
+        @if(activeProduct){
+        <img [src]="activeProduct.images![selectedIndex]" />
+        }
       </div>
       <div class="image-photos">
-        @for (photo of productImages; track $index) {
+        @for (photo of activeProduct!.images; track $index) {
         <div class="image-photo">
-          <img [src]="photo.image" (click)="changeMainImage($index)" />
+          <img [src]="photo" (click)="changeMainImage($index)" />
         </div>
         }
       </div>
@@ -22,30 +24,38 @@
         </button>
       </div>
       <div>
-        <button class="product-button" (click)="prevImage()">
+        <button class="product-button">
           <i class="fa-solid fa-angle-left"></i>
         </button>
-        <button class="product-button" (click)="nextImage()">
+        <button class="product-button">
           <i class="fa-solid fa-angle-right"></i>
         </button>
       </div>
     </div>
   </div>
   <div class="product-content-side">
-    <div class="content-title">Lorem ipsum dolor sit amet lorem base</div>
+    <div class="content-title">{{ activeProduct!.name }}</div>
     <div class="content-price-stars">
-      <div class="price">$63.00</div>
+      @if(activeProduct!.discount){
+      <div class="discount-price">
+        <div class="old-price">${{ activeProduct!.price }}</div>
+        <div class="price">
+          ${{ getDiscountPrice(activeProduct!.price, activeProduct!.discount) }}
+        </div>
+      </div>
+      }@else {
+      <div class="price">${{ activeProduct!.price }}</div>
+      }
       <div class="star">
         <i class="fa-solid fa-star" style="color: orange"></i>
-        <span>4.5</span>
+        <span>{{ activeProduct?.rating }}</span>
       </div>
     </div>
     <div class="desc">
       <span>Açıklama</span>
       <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae
-        corporis quisquam repellat earum illo, quae dolores unde eveniet ipsa
-        fugit? <span class="show-more">Daha fazla...</span>
+        {{ activeProduct!.description }}
+        <span class="show-more">Daha fazla...</span>
       </p>
     </div>
     <button class="main-button">Sepete Ekle</button>

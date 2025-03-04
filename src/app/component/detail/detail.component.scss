@@ -92,6 +92,17 @@
       justify-content: space-between;
       margin-top: 25px;
 
+      .discount-price {
+        display: flex;
+        flex-direction: column;
+
+        .old-price {
+          text-decoration: line-through;
+          color: red;
+          font-style: italic;
+        }
+      }
+
       .price {
         font-weight: bold;
         font-size: 25px;
