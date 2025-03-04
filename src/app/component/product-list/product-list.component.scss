@@ -6,7 +6,7 @@
 
 .products-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   width: 90%;
   max-width: 1200px;
@@ -54,6 +54,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 50px;
     .card-title {
       font-size: 18px;
       font-weight: bold;
@@ -62,6 +63,11 @@
       font-size: 16px;
       font-weight: bold;
       color: var(--green-color);
+
+      &.discount-price {
+        color: red;
+        text-decoration: line-through;
+      }
     }
   }
   .desc {
@@ -73,9 +79,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    margin-top: 15px;
     .stars {
       color: gold;
       font-size: 14px;
+
+      &:hover .rating {
+        opacity: 1;
+      }
+
+      .rating {
+        opacity: 0;
+        font-size: 12px;
+        position: absolute;
+        top: -20px;
+        background-color: var(--border-color);
+        color: #fff;
+        font-weight: bold;
+        padding: 0 5px;
+        transition: all 0.3s ease-in-out;
+      }
     }
   }
 }

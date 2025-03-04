@@ -1,5 +1,6 @@
 <div class="main">
   <div class="products-list">
+    @for (prd of productList; track $index) {
     <div class="product-card">
       <div class="card-image">
         <i class="fa-solid fa-heart"></i>
@@ -7,273 +8,31 @@
       </div>
       <div class="card-content">
         <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
+          <p class="card-title">{{ prd.name }}</p>
+          @if(prd.discount){
+          <div class="discount">
+            <p class="card-price discount-price">${{ prd.price }}</p>
+            <p class="card-price">
+              ${{ getDiscountPrice(prd.price, prd.discount) }}
+            </p>
+          </div>
+          }@else {
+          <p class="card-price">${{ prd.price }}</p>
+          }
         </div>
         <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
+          {{ prd.description }}
         </div>
         <div class="bottom">
           <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
+            <span class="rating">{{ prd.rating }}</span>
+            @if(prd.rating){ @for (star of getStars(prd.rating); track $index) {
+            <i [ngClass]="star"></i>
+            } }
           </div>
         </div>
       </div>
     </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="card-image">
-        <i class="fa-solid fa-heart"></i>
-        <img src="https://picsum.photos/500" />
-      </div>
-      <div class="card-content">
-        <div class="top">
-          <p class="card-title">Cart Title</p>
-          <p class="card-price">$129.99</p>
-        </div>
-        <div class="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-          repellendus, laborum dolorem culpa maiores recusandae.
-        </div>
-        <div class="bottom">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
+    }
   </div>
 </div>
