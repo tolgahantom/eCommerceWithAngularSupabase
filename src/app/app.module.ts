@@ -13,6 +13,7 @@ import { LeftBarComponent } from './shared/left-bar/left-bar.component';
 import { ProductListComponent } from './component/product-list/product-list.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { DetailComponent } from './component/detail/detail.component';
+import { ProductAddComponent } from './admincomponent/product-add/product-add.component';
 
 register();
 
@@ -29,6 +30,7 @@ register();
     ProductListComponent,
     ProductDetailComponent,
     DetailComponent,
+    ProductAddComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
