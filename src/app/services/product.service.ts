@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { supabase } from './supabase.service';
+import { ProductModel } from '../models/product-model';
 
 @Injectable({
   providedIn: 'root',
@@ -198,26 +200,45 @@ export class ProductService {
 
   constructor() {}
 
-  getAllProduct(page: number, productsPerPage: number, categoryId?: number) {
-    let filteredProducts = this.ProductList;
+  async getAllProducts(
+    page: number,
+    productsPerPage: number,
+    categoryId?: number
+  ): Promise<ProductModel[]> {
+    let query = supabase.from('products').select('*');
 
     if (categoryId) {
-      filteredProducts = this.ProductList.filter(
-        (p) => p.categoryId === categoryId
-      );
+      query = query.eq('category_id', categoryId);
     }
 
-    const startIndex = (page - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
+    const start = (page - 1) * productsPerPage;
+    const end = start + productsPerPage - 1;
 
-    return filteredProducts.slice(startIndex, endIndex);
+    const { data, error } = await query.range(start, end);
+
+    if (error) {
+      console.log('getAllProducts hatası: ', error);
+      return [];
+    }
+
+    return data;
   }
 
-  getProductById(id: string) {
-    return this.ProductList[+id - 1];
+  async getProductById(id: string) {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', id);
+
+    if (error) {
+      console.log(error);
+      return null;
+    }
+
+    return data;
   }
 
-  getBlogCount() {
-    return this.ProductList.length;
+  getTotalCount() {
+    return 12;
   }
 }

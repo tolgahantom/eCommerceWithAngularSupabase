@@ -23,7 +23,13 @@ export class DetailComponent implements OnInit {
     const productId = this.route.snapshot.paramMap.get('id');
 
     if (productId) {
-      this.activeProduct = this.productService.getProductById(productId);
+      console.log(productId);
+      this.productService
+        .getProductById(productId)
+        .then((prd) => {
+          prd ? (this.activeProduct = prd[0]) : (this.activeProduct = null);
+        })
+        .catch((err) => console.log(err));
     }
   }
 

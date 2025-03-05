@@ -1,5 +1,5 @@
 export interface CategoryModel {
-  id: number;
+  id: string;
   title: string;
   image?: string;
 }

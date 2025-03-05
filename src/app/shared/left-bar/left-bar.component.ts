@@ -19,7 +19,14 @@ export class LeftBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoryList = this.categoryService.getAllCategories();
+    this.categoryService
+      .getAllCategories()
+      .then((categories) => {
+        this.categoryList = categories;
+      })
+      .catch((err) => {
+        console.log('hata', err);
+      });
   }
 
   changeCategory(newCategory: CategoryModel | null) {

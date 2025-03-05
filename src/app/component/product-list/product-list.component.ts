@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   productList: ProductModel[] = [];
-  public productPerPage: number = 12;
+  public productPerPage: number = 9;
   public selectedPage: number = 1;
   numberOfPage: number = 3;
   selectedCategoryId: number | undefined = undefined;
@@ -23,17 +23,24 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe((params) => {
-      this.selectedCategoryId = Number(params['category']) || undefined;
+      this.selectedCategoryId = params['category'] || undefined;
       this.loadBlogs();
     });
   }
 
   loadBlogs() {
-    this.productList = this.productService.getAllProduct(
-      this.selectedPage,
-      this.productPerPage,
-      this.selectedCategoryId
-    );
+    this.productService
+      .getAllProducts(
+        this.selectedPage,
+        this.productPerPage,
+        this.selectedCategoryId
+      )
+      .then((prd) => {
+        this.productList = prd;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getStars(rating: number): string[] {
@@ -61,9 +68,8 @@ export class ProductListComponent implements OnInit {
   }
 
   getPageArray() {
-    return Array(
-      Math.ceil(this.productService.getBlogCount() / this.productPerPage)
-    )
+    console.log(this.productList.length);
+    return Array(Math.ceil(this.productList.length / this.productPerPage))
       .fill(0)
       .map((a, i) => i + 1);
   }
