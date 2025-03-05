@@ -8,4 +8,5 @@ export interface ProductModel {
   images?: string[];
   discount?: number;
   rating?: number;
+  uploadDate?: Date;
 }
