@@ -4,7 +4,7 @@ export interface ProductModel {
   description: string;
   price: number;
   stock: number;
-  categoryId: string;
+  categoryId: number;
   images?: string[];
   discount?: number;
   rating?: number;

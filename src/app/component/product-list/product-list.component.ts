@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ProductModel } from '../../models/product-model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -13,17 +14,25 @@ export class ProductListComponent implements OnInit {
   public productPerPage: number = 12;
   public selectedPage: number = 1;
   numberOfPage: number = 3;
+  selectedCategoryId: number | undefined = undefined;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadBlogs();
+    this.activeRoute.queryParams.subscribe((params) => {
+      this.selectedCategoryId = Number(params['category']) || undefined;
+      this.loadBlogs();
+    });
   }
 
   loadBlogs() {
     this.productList = this.productService.getAllProduct(
       this.selectedPage,
-      this.productPerPage
+      this.productPerPage,
+      this.selectedCategoryId
     );
   }
 

@@ -4,9 +4,7 @@
     <h2 class="brand-text">Qetra</h2>
   </div>
   <div class="categories">
-    <div class="category" (click)="selectedCategory = null">
-      Tüm Kategoriler
-    </div>
+    <div class="category" (click)="changeCategory(null)">Tüm Kategoriler</div>
     @for (category of categoryList; track $index) {
     <div
       class="category"

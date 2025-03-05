@@ -11,7 +11,7 @@ export class ProductService {
       description: 'Powerful smartphone with A17 Pro chip and titanium design.',
       price: 1299,
       stock: 50,
-      categoryId: 'smartphones',
+      categoryId: 1,
       images: [
         'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_120141353?x=536&y=402&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=536&ey=402&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=536&cdy=402',
         'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_120141256?x=536&y=402&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=536&ey=402&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=536&cdy=402',
@@ -25,7 +25,7 @@ export class ProductService {
       description: 'Flagship Android smartphone with S Pen and 200MP camera.',
       price: 1399,
       stock: 40,
-      categoryId: 'smartphones',
+      categoryId: 1,
       images: [
         'https://example.com/galaxys24ultra_1.jpg',
         'https://example.com/galaxys24ultra_2.jpg',
@@ -39,7 +39,7 @@ export class ProductService {
       description: 'High-end gaming graphics card with 24GB GDDR6X memory.',
       price: 1999,
       stock: 25,
-      categoryId: 'graphics-cards',
+      categoryId: 3,
       images: [
         'https://example.com/rogstrix4090_1.jpg',
         'https://example.com/rogstrix4090_2.jpg',
@@ -54,7 +54,7 @@ export class ProductService {
         'Next-gen gaming console with ultra-fast SSD and ray tracing support.',
       price: 499,
       stock: 60,
-      categoryId: 'gaming-consoles',
+      categoryId: 2,
       images: ['https://example.com/ps5_1.jpg'],
       discount: 0,
       rating: 4.9,
@@ -65,7 +65,7 @@ export class ProductService {
       description: 'Ultra-thin laptop with M2 chip and Liquid Retina display.',
       price: 1199,
       stock: 30,
-      categoryId: 'laptops',
+      categoryId: 1,
       images: [
         'https://example.com/macbookairm2_1.jpg',
         'https://example.com/macbookairm2_2.jpg',
@@ -79,7 +79,7 @@ export class ProductService {
       description: 'Premium 15-inch laptop with 4K display and Intel Core i9.',
       price: 1799,
       stock: 20,
-      categoryId: 'laptops',
+      categoryId: 2,
       images: ['https://example.com/dellxps15_1.jpg'],
       discount: 8,
       rating: 4.7,
@@ -91,7 +91,7 @@ export class ProductService {
         'Noise-canceling wireless headphones with long battery life.',
       price: 349,
       stock: 100,
-      categoryId: 'headphones',
+      categoryId: 3,
       images: ['https://example.com/boseqc45_1.jpg'],
       discount: 10,
       rating: 4.7,
@@ -103,7 +103,7 @@ export class ProductService {
         'Industry-leading noise-canceling headphones with high-resolution audio.',
       price: 399,
       stock: 80,
-      categoryId: 'headphones',
+      categoryId: 1,
       images: ['https://example.com/sonywh1000xm5_1.jpg'],
       discount: 5,
       rating: 4.8,
@@ -114,7 +114,7 @@ export class ProductService {
       description: 'Rugged 5K action camera with HyperSmooth stabilization.',
       price: 499,
       stock: 35,
-      categoryId: 'cameras',
+      categoryId: 2,
       images: [
         'https://example.com/goprohero12_1.jpg',
         'https://example.com/goprohero12_2.jpg',
@@ -129,7 +129,7 @@ export class ProductService {
         'Full-frame mirrorless camera with 24MP sensor and 4K video.',
       price: 2499,
       stock: 15,
-      categoryId: 'cameras',
+      categoryId: 3,
       images: ['https://example.com/canoneosr6mkii_1.jpg'],
       discount: 5,
       rating: 4.9,
@@ -140,7 +140,7 @@ export class ProductService {
       description: '4K OLED TV with Quantum HDR and 120Hz refresh rate.',
       price: 1499,
       stock: 45,
-      categoryId: 'televisions',
+      categoryId: 3,
       images: ['https://example.com/samsung55oled_1.jpg'],
       discount: 12,
       rating: 4.7,
@@ -152,7 +152,7 @@ export class ProductService {
         'High-performance cordless vacuum with laser dust detection.',
       price: 699,
       stock: 25,
-      categoryId: 'home-appliances',
+      categoryId: 1,
       images: ['https://example.com/dysonv15detect_1.jpg'],
       discount: 10,
       rating: 4.8,
@@ -163,7 +163,7 @@ export class ProductService {
       description: 'Portable gaming console with a vibrant OLED display.',
       price: 349,
       stock: 50,
-      categoryId: 'gaming-consoles',
+      categoryId: 2,
       images: ['https://example.com/switcholed_1.jpg'],
       discount: 5,
       rating: 4.8,
@@ -175,7 +175,7 @@ export class ProductService {
         'Advanced wireless mouse with customizable buttons and precision tracking.',
       price: 99,
       stock: 200,
-      categoryId: 'computer-accessories',
+      categoryId: 3,
       images: ['https://example.com/mxmaster3s_1.jpg'],
       discount: 5,
       rating: 4.9,
@@ -186,7 +186,7 @@ export class ProductService {
       description: 'Mechanical gaming keyboard with Razer Green switches.',
       price: 169,
       stock: 75,
-      categoryId: 'computer-accessories',
+      categoryId: 3,
       images: [
         'https://example.com/blackwidowv4_1.jpg',
         'https://example.com/blackwidowv4_2.jpg',
@@ -198,11 +198,19 @@ export class ProductService {
 
   constructor() {}
 
-  getAllProduct(page: number, productsPerPage: number) {
-    const startIndex = (page - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage - 1;
+  getAllProduct(page: number, productsPerPage: number, categoryId?: number) {
+    let filteredProducts = this.ProductList;
 
-    return this.ProductList.slice(startIndex, endIndex);
+    if (categoryId) {
+      filteredProducts = this.ProductList.filter(
+        (p) => p.categoryId === categoryId
+      );
+    }
+
+    const startIndex = (page - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+
+    return filteredProducts.slice(startIndex, endIndex);
   }
 
   getProductById(id: string) {
