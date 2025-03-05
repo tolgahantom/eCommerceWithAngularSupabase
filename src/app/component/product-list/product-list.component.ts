@@ -11,9 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   productList: ProductModel[] = [];
-  public productPerPage: number = 9;
+  public productPerPage: number = 8;
   public selectedPage: number = 1;
   numberOfPage: number = 3;
+  productCount: number = 0;
   selectedCategoryId: number | undefined = undefined;
 
   constructor(
@@ -35,8 +36,9 @@ export class ProductListComponent implements OnInit {
         this.productPerPage,
         this.selectedCategoryId
       )
-      .then((prd) => {
-        this.productList = prd;
+      .then((data) => {
+        this.productList = data.products;
+        this.productCount = data.totalCount;
       })
       .catch((err) => {
         console.log(err);
@@ -68,8 +70,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getPageArray() {
-    console.log(this.productList.length);
-    return Array(Math.ceil(this.productList.length / this.productPerPage))
+    return Array(Math.ceil(this.productCount / this.productPerPage))
       .fill(0)
       .map((a, i) => i + 1);
   }
