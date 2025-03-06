@@ -14,6 +14,7 @@ import { ProductListComponent } from './component/product-list/product-list.comp
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { DetailComponent } from './component/detail/detail.component';
 import { ProductAddComponent } from './admincomponent/product-add/product-add.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 register();
 
@@ -31,6 +32,7 @@ register();
     ProductDetailComponent,
     DetailComponent,
     ProductAddComponent,
+    LoaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

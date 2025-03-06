@@ -7,7 +7,7 @@
         }
       </div>
       <div class="image-photos">
-        @for (photo of activeProduct!.images; track $index) {
+        @for (photo of activeProduct?.images; track $index) {
         <div class="image-photo">
           <img [src]="photo" (click)="changeMainImage($index)" />
         </div>
@@ -34,17 +34,17 @@
     </div>
   </div>
   <div class="product-content-side">
-    <div class="content-title">{{ activeProduct!.name }}</div>
+    <div class="content-title">{{ activeProduct?.name }}</div>
     <div class="content-price-stars">
       @if(activeProduct!.discount){
       <div class="discount-price">
-        <div class="old-price">${{ activeProduct!.price }}</div>
+        <div class="old-price">${{ activeProduct?.price }}</div>
         <div class="price">
           ${{ getDiscountPrice(activeProduct!.price, activeProduct!.discount) }}
         </div>
       </div>
       }@else {
-      <div class="price">${{ activeProduct!.price }}</div>
+      <div class="price">${{ activeProduct?.price }}</div>
       }
       <div class="star">
         <i class="fa-solid fa-star" style="color: orange"></i>
@@ -61,3 +61,4 @@
     <button class="main-button">Sepete Ekle</button>
   </div>
 </div>
+<app-loader></app-loader>

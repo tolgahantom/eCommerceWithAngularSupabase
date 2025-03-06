@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ProductModel } from '../../models/product-model';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +20,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class ProductListComponent implements OnInit {
   }
 
   loadBlogs() {
+    this.loaderService.show();
     this.productService
       .getAllProducts(
         this.selectedPage,
@@ -39,6 +42,7 @@ export class ProductListComponent implements OnInit {
       .then((data) => {
         this.productList = data.products;
         this.productCount = data.totalCount;
+        this.loaderService.hide();
       })
       .catch((err) => {
         console.log(err);
