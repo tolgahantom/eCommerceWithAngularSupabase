@@ -141,3 +141,17 @@
     }
   }
 }
+
+@media(max-width:1200px){
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+  }
+
+  .products-list {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 50px;
+  }
+}
