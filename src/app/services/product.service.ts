@@ -6,12 +6,62 @@ import { ProductModel } from '../models/product-model';
   providedIn: 'root',
 })
 export class ProductService {
+  async uploadImages(files: File[]): Promise<string[]> {
+    const uploadedUrls: string[] = [];
+
+    for (const file of files) {
+      const filePath = `${Date.now()}-${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('product_images')
+        .upload(filePath, file);
+
+      if (error) {
+        console.error('Resim yükleme hatası:', error);
+        continue;
+      }
+
+      const url = supabase.storage.from('product_images').getPublicUrl(filePath)
+        .data.publicUrl;
+      uploadedUrls.push(url);
+    }
+
+    return uploadedUrls;
+  }
+
+  async addProduct(product: any, imageFiles: File[]) {
+    const imageUrls = await this.uploadImages(imageFiles);
+
+    const { data, error } = await supabase.from('products').insert([
+      {
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stock: 50,
+        category_id: product.categoryId,
+        images: imageUrls,
+        discount: product.discount | 0,
+        rating: 0,
+        upload_date: new Date().toISOString(),
+      },
+    ]);
+
+    if (error) {
+      console.error('Ürün ekleme hatası:', error.message);
+      console.error('Hata detayları:', error.details);
+    } else {
+      console.log('Ürün eklendi:', data);
+    }
+  }
+
   async getAllProducts(
     page: number,
     productsPerPage: number,
     categoryId?: number
   ): Promise<{ products: ProductModel[]; totalCount: number }> {
-    let query = supabase.from('products').select('*', { count: 'exact' });
+    let query = supabase
+      .from('products')
+      .select('*', { count: 'exact' })
+      .order('upload_date', { ascending: false });
 
     if (categoryId) {
       query = query.eq('category_id', categoryId);

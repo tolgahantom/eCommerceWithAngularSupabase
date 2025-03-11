@@ -15,6 +15,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { DetailComponent } from './component/detail/detail.component';
 import { ProductAddComponent } from './admincomponent/product-add/product-add.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 register();
 
@@ -34,7 +35,7 @@ register();
     ProductAddComponent,
     LoaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
