@@ -20,7 +20,9 @@
   </ul>
   <div class="personal">
     <div class="wish">Beğeniler(0)</div>
-    <div class="cart" (click)="cartIsOpen = !cartIsOpen">Sepetin(0)</div>
+    <div class="cart" (click)="cartIsOpen = !cartIsOpen">
+      Sepetim({{ cartItems.length }})
+    </div>
     <div class="search">
       <i class="fa-solid fa-magnifying-glass"></i>
     </div>
@@ -35,26 +37,26 @@
   <div class="cart-content" (click)="$event.stopPropagation()">
     <i class="fa-solid fa-xmark" (click)="cartIsOpen = !cartIsOpen"></i>
     <div class="top">
-      <span class="title">Sepetin</span>
-      <span class="count">3</span>
+      <span class="title">Sepetim</span>
+      <span class="count">{{ cartItems.length }}</span>
     </div>
     <div class="card-list">
+      @for (prd of cartItems; track $index) {
       <div class="card-item">
-        <span class="card-item-title">Lorem ipsum</span>
-        <span> <i class="fa-solid fa-turkish-lira-sign"></i>122</span>
+        <span class="card-item-title">{{ prd.name }}</span>
+        <span>
+          <i class="fa-solid fa-turkish-lira-sign"></i
+          >{{ getPrice(prd.price, prd.discount) }}</span
+        >
       </div>
-      <div class="card-item">
-        <span class="card-item-title">Lorem ipsum</span>
-        <span> <i class="fa-solid fa-turkish-lira-sign"></i>122</span>
-      </div>
-      <div class="card-item">
-        <span class="card-item-title">Lorem ipsum</span>
-        <span> <i class="fa-solid fa-turkish-lira-sign"></i>122</span>
-      </div>
+      }
     </div>
     <div class="total">
       <span>Toplam(TL)</span>
-      <span><i class="fa-solid fa-turkish-lira-sign"></i>300</span>
+      <span
+        ><i class="fa-solid fa-turkish-lira-sign"></i
+        >{{ getTotalPrice() }}</span
+      >
     </div>
     <button class="main-button" style="background-color: var(--green-color)">
       Ödemeye Devam Et

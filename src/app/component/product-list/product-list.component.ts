@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { ProductModel } from '../../models/product-model';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
+import { CartService } from '../../services/cart-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,17 +22,18 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private activeRoute: ActivatedRoute,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe((params) => {
       this.selectedCategoryId = params['category'] || undefined;
-      this.loadBlogs();
+      this.loadPrds();
     });
   }
 
-  loadBlogs() {
+  loadPrds() {
     this.loaderService.show();
     this.productService
       .getAllProducts(
@@ -69,7 +71,7 @@ export class ProductListComponent implements OnInit {
 
   changePage(page: number): void {
     this.selectedPage = page;
-    this.loadBlogs();
+    this.loadPrds();
     window.scrollTo(0, 0);
   }
 
@@ -77,5 +79,10 @@ export class ProductListComponent implements OnInit {
     return Array(Math.ceil(this.productCount / this.productPerPage))
       .fill(0)
       .map((a, i) => i + 1);
+  }
+
+  addToCart(prd: ProductModel, e: Event) {
+    e.stopPropagation();
+    this.cartService.addToCart(prd);
   }
 }
