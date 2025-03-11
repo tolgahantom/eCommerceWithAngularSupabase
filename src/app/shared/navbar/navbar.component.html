@@ -46,7 +46,7 @@
         <span class="card-item-title">{{ prd.name }}</span>
         <span>
           <i class="fa-solid fa-turkish-lira-sign"></i
-          >{{ getPrice(prd.price, prd.discount) }}</span
+          >{{ getPrice(prd.price, prd.discount).toFixed(0) }}</span
         >
       </div>
       }

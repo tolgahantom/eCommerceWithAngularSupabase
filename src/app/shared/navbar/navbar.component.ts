@@ -25,8 +25,10 @@ export class NavbarComponent implements OnInit {
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, prd) => {
-      return total + this.getPrice(prd.price, prd.discount);
-    }, 0);
+    return Math.floor(
+      this.cartItems.reduce((total, prd) => {
+        return total + this.getPrice(prd.price, prd.discount);
+      }, 0)
+    );
   }
 }
