@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart-service.service';
-import { HttpBackend } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -11,12 +12,17 @@ import { HttpBackend } from '@angular/common/http';
 export class NavbarComponent implements OnInit {
   cartIsOpen: boolean = false;
   cartItems: any[] = [];
+  user$!: Observable<any | null>;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
+      this.user$ = this.authService.user$;
     });
   }
 
@@ -30,5 +36,9 @@ export class NavbarComponent implements OnInit {
         return total + this.getPrice(prd.price, prd.discount);
       }, 0)
     );
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

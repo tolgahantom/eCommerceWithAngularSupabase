@@ -23,9 +23,15 @@
     <div class="cart" (click)="cartIsOpen = !cartIsOpen">
       Sepetim({{ cartItems.length }})
     </div>
-    <div class="search">
-      <i class="fa-solid fa-magnifying-glass"></i>
+    @if (user$ | async; as user ) {
+    <p style="cursor: pointer" (click)="logout()">
+      {{ user.user_metadata.name }}
+    </p>
+    }@else {
+    <div class="login" [routerLink]="['register']">
+      <i class="fa-regular fa-user"></i>
     </div>
+    }
   </div>
 </div>
 

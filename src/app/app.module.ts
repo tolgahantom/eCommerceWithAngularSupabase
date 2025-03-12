@@ -16,6 +16,8 @@ import { DetailComponent } from './component/detail/detail.component';
 import { ProductAddComponent } from './admincomponent/product-add/product-add.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginpageComponent } from './pages/loginpage/loginpage.component';
 
 register();
 
@@ -34,6 +36,8 @@ register();
     DetailComponent,
     ProductAddComponent,
     LoaderComponent,
+    RegisterComponent,
+    LoginpageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

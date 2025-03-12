@@ -1,0 +1,93 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Kayıt Ol</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="form-group">
+        <label for="name">Adınız</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Adınızı girin"
+        />
+        <small
+          *ngIf="
+            registerForm.get('name')?.invalid &&
+            registerForm.get('name')?.touched
+          "
+        >
+          Ad zorunludur.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="surname">Soyadınız</label>
+        <input
+          type="text"
+          id="surname"
+          formControlName="surname"
+          placeholder="Soyadınızı girin"
+        />
+        <small
+          *ngIf="
+            registerForm.get('surname')?.invalid &&
+            registerForm.get('surname')?.touched
+          "
+        >
+          Soyad zorunludur.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-Posta</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="E-posta adresinizi girin"
+        />
+        <small
+          *ngIf="
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+          "
+        >
+          Geçerli bir e-posta adresi giriniz.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Şifre</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Şifrenizi girin"
+        />
+        <small
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+          "
+        >
+          Şifre en az 6 karakter olmalıdır.
+        </small>
+      </div>
+
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+      <button
+        type="submit"
+        class="register-btn"
+        [disabled]="registerForm.invalid"
+      >
+        Kayıt Ol
+      </button>
+    </form>
+
+    <p class="login-link">
+      Zaten hesabınız var mı?
+      <a [routerLink]="['/login']" style="cursor: pointer">Giriş Yap</a>
+    </p>
+  </div>
+</div>
