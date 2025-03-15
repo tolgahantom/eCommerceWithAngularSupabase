@@ -48,7 +48,7 @@
       }
       <div class="star">
         <i class="fa-solid fa-star" style="color: orange"></i>
-        <span>{{ activeProduct?.rating }}</span>
+        <span>{{ activeProduct?.average_rating }}</span>
       </div>
     </div>
     <div class="desc">
@@ -58,6 +58,11 @@
         <span class="show-more">Daha fazla...</span>
       </p>
     </div>
+    <app-star-rating
+      [rating]="5"
+      (ratingChange)="onRate($event)"
+      style="margin: 20px 0"
+    ></app-star-rating>
     <button class="main-button">Sepete Ekle</button>
   </div>
 </div>

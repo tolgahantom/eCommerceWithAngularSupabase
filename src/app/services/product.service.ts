@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { supabase } from './supabase.service';
 import { ProductModel } from '../models/product-model';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  constructor(private authService: AuthService) {}
+
   async uploadImages(files: File[]): Promise<string[]> {
     const uploadedUrls: string[] = [];
 
@@ -92,5 +96,62 @@ export class ProductService {
     }
 
     return data;
+  }
+
+  async rateProduct(productId: string, rating: number) {
+    const user = await firstValueFrom(this.authService.getUser());
+
+    if (!user) {
+      console.error('Puan vermek için giriş yapmalısınız.');
+      return;
+    }
+
+    const { data: existingRating } = await supabase
+      .from('ratings')
+      .select('id')
+      .eq('product_id', productId)
+      .eq('user_id', user.id)
+      .single();
+
+    if (existingRating) {
+      await supabase
+        .from('ratings')
+        .update({ rating })
+        .eq('id', existingRating.id);
+    } else {
+      await supabase
+        .from('ratings')
+        .insert([{ product_id: productId, user_id: user.id, rating }]);
+    }
+
+    const { data, error } = await supabase.from('ratings').select('rating');
+
+    if (!error && data) {
+      const avgRating =
+        data.reduce((sum, r) => sum + r.rating, 0) / data.length;
+
+      await supabase
+        .from('products')
+        .update({ average_rating: avgRating })
+        .eq('id', productId);
+    }
+  }
+
+  async getAverageRating(productId: number): Promise<number> {
+    const { data, error } = await supabase
+      .from('ratings')
+      .select('rating')
+      .eq('product_id', productId);
+
+    if (error) {
+      console.error('Puanları çekerken hata oluştu:', error.message);
+      return 0;
+    }
+
+    if (!data.length) return 0;
+
+    const average =
+      data.reduce((sum, item) => sum + item.rating, 0) / data.length;
+    return parseFloat(average.toFixed(1));
   }
 }

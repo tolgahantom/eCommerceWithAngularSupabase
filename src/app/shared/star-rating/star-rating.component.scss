@@ -1,0 +1,14 @@
+.stars {
+  display: flex;
+  gap: 5px;
+  font-size: 24px;
+  cursor: pointer;
+
+  fa-star {
+    color: gold;
+  }
+
+  fa-star-o {
+    color: red;
+  }
+}

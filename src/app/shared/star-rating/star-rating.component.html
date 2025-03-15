@@ -1,0 +1,14 @@
+<div class="stars">
+  <i
+    *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+    class="fa-solid"
+    [ngClass]="{
+      'fa-star': hoverIndex ? hoverIndex >= star : rating >= star,
+      'fa-star-half-alt': rating > star - 1 && rating < star,
+      'fa-star-o': rating < star
+    }"
+    (click)="setRating(star)"
+    (mouseover)="setHover(star)"
+    (mouseleave)="clearHover()"
+  ></i>
+</div>

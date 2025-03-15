@@ -7,6 +7,6 @@ export interface ProductModel {
   categoryId: number;
   images?: string[];
   discount?: number;
-  rating?: number;
+  average_rating?: number;
   uploadDate?: Date;
 }
