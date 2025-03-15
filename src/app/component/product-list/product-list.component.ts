@@ -85,4 +85,8 @@ export class ProductListComponent implements OnInit {
     e.stopPropagation();
     this.cartService.addToCart(prd);
   }
+
+  roundToNearestHalf(number: any) {
+    return Math.round(number * 2) / 2;
+  }
 }

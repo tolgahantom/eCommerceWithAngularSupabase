@@ -48,7 +48,7 @@
       }
       <div class="star">
         <i class="fa-solid fa-star" style="color: orange"></i>
-        <span>{{ activeProduct?.average_rating }}</span>
+        <span>{{ roundToNearestHalf(activeProduct?.average_rating) }}</span>
       </div>
     </div>
     <div class="desc">

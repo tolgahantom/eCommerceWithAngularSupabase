@@ -27,8 +27,11 @@
         </div>
         <div class="bottom">
           <div class="stars">
-            <span class="rating">{{ prd.rating }}</span>
-            @if(prd.rating){ @for (star of getStars(prd.rating); track $index) {
+            <span class="rating">{{
+              roundToNearestHalf(prd.average_rating)
+            }}</span>
+            @if(prd.average_rating){ @for (star of getStars(prd.average_rating);
+            track $index) {
             <i [ngClass]="star"></i>
             } }
           </div>

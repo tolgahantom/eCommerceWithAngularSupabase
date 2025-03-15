@@ -47,4 +47,8 @@ export class DetailComponent implements OnInit {
   onRate(newRating: number) {
     this.productService.rateProduct(this.activeProduct!.id, newRating);
   }
+
+  roundToNearestHalf(number: any) {
+    return Math.round(number * 2) / 2;
+  }
 }
