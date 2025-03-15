@@ -137,7 +137,7 @@ export class ProductService {
     }
   }
 
-  async getAverageRating(productId: number): Promise<number> {
+  async getAverageRating(productId: string): Promise<number> {
     const { data, error } = await supabase
       .from('ratings')
       .select('rating')
