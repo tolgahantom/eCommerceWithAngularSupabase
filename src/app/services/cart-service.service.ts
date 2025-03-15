@@ -141,15 +141,25 @@ export class CartService {
     const user = await firstValueFrom(this.authService.getUser());
 
     if (user) {
-      await supabase
+      const { error } = await supabase
         .from('cart')
         .delete()
         .eq('product_id', productId)
         .eq('user_id', user.id);
+
+      if (!error) {
+        this.cartItems = this.cartItems.filter(
+          (item) => item.product_id !== productId
+        );
+      } else {
+        console.error('Ürün silme hatası:', error.message);
+        return;
+      }
     } else {
       this.cartItems = this.cartItems.filter((item) => item.id !== productId);
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
     }
-    this.cartItemsSubject.next(this.cartItems);
+
+    this.cartItemsSubject.next([...this.cartItems]);
   }
 }
