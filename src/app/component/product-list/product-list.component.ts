@@ -81,7 +81,7 @@ export class ProductListComponent implements OnInit {
       .map((a, i) => i + 1);
   }
 
-  addToCart(prd: ProductModel, e: Event) {
+  addToCart(prd: any, e: Event) {
     e.stopPropagation();
     this.cartService.addToCart(prd);
   }

@@ -158,6 +158,33 @@
         justify-content: space-between;
         font-style: italic;
 
+        .quantity {
+          margin-left: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+
+          button {
+            width: 17px;
+            height: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 19px;
+            color: white;
+
+            &:first-child {
+              background-color: red;
+            }
+
+            &:last-child {
+              background-color: green;
+            }
+          }
+        }
+
         i {
           font-size: 13px;
         }

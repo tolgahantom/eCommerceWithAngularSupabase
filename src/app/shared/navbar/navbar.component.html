@@ -49,10 +49,28 @@
     <div class="card-list">
       @for (prd of cartItems; track $index) {
       <div class="card-item">
-        <span class="card-item-title">{{ prd.name }}</span>
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
+          <span class="card-item-title">
+            {{ prd.products.name }}
+            <div class="quantity">
+              <button (click)="updateQuantity(prd, prd.quantity - 1)">-</button>
+              <span>({{ prd.quantity }})</span>
+              <button (click)="updateQuantity(prd, prd.quantity + 1)">+</button>
+            </div>
+          </span>
+        </div>
+
         <span>
           <i class="fa-solid fa-turkish-lira-sign"></i
-          >{{ getPrice(prd.price, prd.discount).toFixed(0) }}</span
+          >{{
+            getPrice(
+              prd.products.price,
+              prd.products.discount,
+              prd.quantity
+            ).toFixed(0)
+          }}</span
         >
       </div>
       }

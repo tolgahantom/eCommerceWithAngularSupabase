@@ -46,8 +46,8 @@ export class ProductService {
     ]);
 
     if (error) {
-      console.error('Ürün ekleme hatası:', error.message);
-      console.error('Hata detayları:', error.details);
+      console.error('Ürün ekleme hatası:');
+      console.error('Hata detayları:');
     } else {
       console.log('Ürün eklendi:', data);
     }
