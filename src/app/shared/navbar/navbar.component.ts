@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart-service.service';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,12 +12,16 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   cartIsOpen: boolean = false;
+  searchOpen: boolean = false;
   cartItems: any[] = [];
   user$!: Observable<any | null>;
+  searchQuery: string = '';
+  searchResults: any[] = [];
 
   constructor(
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private productService: ProductService
   ) {}
 
   ngOnInit() {
@@ -43,6 +48,16 @@ export class NavbarComponent implements OnInit {
     );
   }
 
+  async onSearch() {
+    if (this.searchQuery.length < 2) {
+      this.searchResults = [];
+      return;
+    }
+    this.searchResults = await this.productService.searchProducts(
+      this.searchQuery
+    );
+  }
+
   updateQuantity(product: any, newQuantity: number) {
     if (newQuantity < 1) {
       if (confirm('Ürünü sepetten çıkarmak istediğinize emin misiniz?')) {
@@ -56,5 +71,10 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  toggleSearch() {
+    this.searchQuery = '';
+    this.searchOpen = !this.searchOpen;
   }
 }

@@ -15,7 +15,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { DetailComponent } from './component/detail/detail.component';
 import { ProductAddComponent } from './admincomponent/product-add/product-add.component';
 import { LoaderComponent } from './shared/loader/loader.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginpageComponent } from './pages/loginpage/loginpage.component';
 import { StarRatingComponent } from './shared/star-rating/star-rating.component';
@@ -41,7 +41,7 @@ register();
     LoginpageComponent,
     StarRatingComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

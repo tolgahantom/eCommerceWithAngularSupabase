@@ -44,14 +44,13 @@ export class ProductService {
         category_id: product.categoryId,
         images: imageUrls,
         discount: product.discount | 0,
-        rating: 0,
+        average_rating: 0,
         upload_date: new Date().toISOString(),
       },
     ]);
 
     if (error) {
-      console.error('Ürün ekleme hatası:');
-      console.error('Hata detayları:');
+      console.error('Ürün ekleme hatası:', error.message);
     } else {
       console.log('Ürün eklendi:', data);
     }
@@ -153,5 +152,20 @@ export class ProductService {
     const average =
       data.reduce((sum, item) => sum + item.rating, 0) / data.length;
     return parseFloat(average.toFixed(1));
+  }
+
+  async searchProducts(query: string): Promise<ProductModel[]> {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .ilike('name', `%${query}%`)
+      .order('upload_date', { ascending: false });
+
+    if (error) {
+      console.log('searchProducts hatası: ', error);
+      return [];
+    }
+
+    return data || [];
   }
 }

@@ -3,21 +3,14 @@
     <h1>Qetra</h1>
   </div>
   <ul class="navbar-list">
-    <li class="navbar-list-item">
-      Home
-      <i class="fa-solid fa-caret-down"></i>
-      <ul class="dropdown">
-        <li class="dropdown-item">Home1</li>
-        <li class="dropdown-item">Home1</li>
-        <li class="dropdown-item">Home1</li>
-      </ul>
-    </li>
+    <li class="navbar-list-item">Home</li>
     <li class="navbar-list-item" [routerLink]="['products']">Ürünler</li>
     <li class="navbar-list-item" [routerLink]="['product-create']">
       Ürün Ekle
     </li>
-    <li class="navbar-list-item">Bize Ulaşın</li>
+    <li class="navbar-list-item" (click)="toggleSearch()">Ürün Ara</li>
   </ul>
+
   <div class="personal">
     <div class="wish">Beğeniler(0)</div>
     <div class="cart" (click)="cartIsOpen = !cartIsOpen">
@@ -87,3 +80,41 @@
     </button>
   </div>
 </div>
+
+@if(searchOpen){
+<div class="search-overlay" (click)="toggleSearch()">
+  <div class="search-container" (click)="$event.stopPropagation()">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Ürün ara..."
+      (keyup.escape)="toggleSearch()"
+      (input)="onSearch()"
+      autofocus
+    />
+    @if(searchResults.length > 0){
+    <ul class="search-results">
+      @for (product of searchResults; track $index) {
+      <li
+        class="search-item"
+        [routerLink]="['product', product.id]"
+        (click)="toggleSearch()"
+      >
+        @if(product.images.length > 0){
+        <img [src]="product.images[0]" alt="{{ product.name }}" />
+        }@else {
+        <img
+          src="https://img.freepik.com/premium-vector/no-photo-available-vector-icon-default-image-symbol-picture-coming-soon-web-site-mobile-app_87543-18055.jpg"
+        />
+        }
+        <div class="product-info">
+          <h4>{{ product.name }}</h4>
+          <p>${{ product.price }}</p>
+        </div>
+      </li>
+      }
+    </ul>
+    }
+  </div>
+</div>
+}
