@@ -2,12 +2,12 @@
   <div class="product-image-side">
     <div class="product-image-selector">
       <div class="main-product-image">
-        @if(activeProduct){
-        <img [src]="activeProduct.images![selectedIndex]" />
-        }
+        <img
+          [src]="activeProduct.images?.[selectedIndex] || 'https://img.freepik.com/premium-vector/no-photo-available-vector-icon-default-image-symbol-picture-coming-soon-web-site-mobile-app_87543-18055.jpg'"
+        />
       </div>
       <div class="image-photos">
-        @for (photo of activeProduct?.images; track $index) {
+        @for (photo of activeProduct.images; track $index) {
         <div class="image-photo">
           <img [src]="photo" (click)="changeMainImage($index)" />
         </div>
@@ -34,27 +34,27 @@
     </div>
   </div>
   <div class="product-content-side">
-    <div class="content-title">{{ activeProduct?.name }}</div>
+    <div class="content-title">{{ activeProduct.name }}</div>
     <div class="content-price-stars">
       @if(activeProduct!.discount){
       <div class="discount-price">
-        <div class="old-price">${{ activeProduct?.price }}</div>
+        <div class="old-price">${{ activeProduct.price }}</div>
         <div class="price">
-          ${{ getDiscountPrice(activeProduct!.price, activeProduct!.discount) }}
+          ${{ getDiscountPrice(activeProduct.price, activeProduct.discount) }}
         </div>
       </div>
       }@else {
-      <div class="price">${{ activeProduct?.price }}</div>
+      <div class="price">${{ activeProduct.price }}</div>
       }
       <div class="star">
         <i class="fa-solid fa-star" style="color: orange"></i>
-        <span>{{ roundToNearestHalf(activeProduct?.average_rating) }}</span>
+        <span>{{ roundToNearestHalf(activeProduct.average_rating) }}</span>
       </div>
     </div>
     <div class="desc">
       <span>Açıklama</span>
       <p>
-        {{ activeProduct!.description }}
+        {{ activeProduct.description }}
         <span class="show-more">Daha fazla...</span>
       </p>
     </div>

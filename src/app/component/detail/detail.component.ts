@@ -11,7 +11,7 @@ import { LoaderService } from '../../services/loader.service';
   styleUrl: './detail.component.scss',
 })
 export class DetailComponent implements OnInit {
-  activeProduct: ProductModel | null = null;
+  activeProduct: ProductModel = {} as ProductModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +29,9 @@ export class DetailComponent implements OnInit {
       this.productService
         .getProductById(productId)
         .then((prd) => {
-          prd ? (this.activeProduct = prd[0]) : (this.activeProduct = null);
+          if (prd) {
+            this.activeProduct = prd[0];
+          }
           this.loaderService.hide();
         })
         .catch((err) => console.log(err));
