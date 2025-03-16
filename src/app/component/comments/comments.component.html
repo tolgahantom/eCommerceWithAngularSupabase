@@ -1,0 +1,26 @@
+<div class="comment-section">
+  <h3>Yorumlar</h3>
+  <div class="comment-list">
+    <div class="comment" *ngFor="let comment of comments">
+      <div class="comment-header">
+        <span class="username">
+          {{ comment.users?.name }} {{ comment.users?.surname }}
+        </span>
+        <span class="date">{{ comment.created_at | date : "short" }}</span>
+      </div>
+      <p>{{ comment.content }}</p>
+      <div class="comment-meta">
+        <span>👍 {{ comment.like_count }}</span>
+        <span>👎 {{ comment.dislike_count }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-form">
+    <textarea
+      [(ngModel)]="newComment"
+      placeholder="Yorumunuzu yazın..."
+    ></textarea>
+    <button (click)="addComment()">Gönder</button>
+  </div>
+</div>

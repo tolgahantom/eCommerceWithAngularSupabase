@@ -52,7 +52,19 @@ export class AuthService {
     });
 
     if (error) throw error;
-    this.userSubject.next(data.user);
+
+    if (data.user) {
+      const { error: insertError } = await supabase.from('users').insert([
+        {
+          id: data.user.id,
+          email: data.user.email,
+          name: name,
+          surname: surname,
+        },
+      ]);
+
+      if (insertError) throw insertError;
+    }
   }
 
   async logout() {

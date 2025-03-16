@@ -184,4 +184,33 @@ export class ProductService {
     }
     return data;
   }
+
+  async getComments(productId: string) {
+    const { data, error } = await supabase
+      .from('comments')
+      .select(
+        'id, content, like_count, dislike_count, created_at, users(name, surname, email)'
+      )
+      .eq('product_id', productId)
+      .order('like_count', { ascending: false });
+
+    if (error) {
+      console.error('Yorumları çekerken hata oluştu:', error);
+      return [];
+    }
+
+    return data;
+  }
+
+  async addComment(productId: string, userId: string, content: string) {
+    const { data, error } = await supabase
+      .from('comments')
+      .insert([{ product_id: productId, user_id: userId, content }]);
+
+    if (error) {
+      console.error('Yorum eklerken hata oluştu:', error);
+      return null;
+    }
+    return data;
+  }
 }

@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginpageComponent } from './pages/loginpage/loginpage.component';
 import { StarRatingComponent } from './shared/star-rating/star-rating.component';
+import { CommentsComponent } from './component/comments/comments.component';
 
 register();
 
@@ -40,6 +41,7 @@ register();
     RegisterComponent,
     LoginpageComponent,
     StarRatingComponent,
+    CommentsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
