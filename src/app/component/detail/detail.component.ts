@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { ProductModel } from '../../models/product-model';
 import { LoaderService } from '../../services/loader.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
@@ -12,6 +13,9 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class DetailComponent implements OnInit {
   activeProduct: ProductModel = {} as ProductModel;
+  similarProducts: any[] = [];
+  private routeSub!: Subscription;
+  selectedIndex = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,23 +23,36 @@ export class DetailComponent implements OnInit {
     private loaderService: LoaderService
   ) {}
 
-  selectedIndex = 0;
-
   ngOnInit(): void {
-    this.loaderService.show();
-    const productId = this.route.snapshot.paramMap.get('id');
+    this.routeSub = this.route.paramMap.subscribe((params) => {
+      const productId = params.get('id');
+      if (productId) {
+        this.fetchProduct(productId);
+      }
+    });
+  }
 
-    if (productId) {
-      this.productService
-        .getProductById(productId)
-        .then((prd) => {
-          if (prd) {
-            this.activeProduct = prd[0];
-          }
-          this.loaderService.hide();
-        })
-        .catch((err) => console.log(err));
+  async fetchProduct(productId: string) {
+    this.loaderService.show();
+    try {
+      const prd = await this.productService.getProductById(productId);
+      if (prd && prd.length > 0) {
+        this.activeProduct = prd[0];
+        this.getSimilarProducts(prd[0].category_id, prd[0].id);
+        this.selectedIndex = 0;
+      }
+    } catch (err) {
+      console.error('Ürün yüklenirken hata oluştu:', err);
+    } finally {
+      this.loaderService.hide();
     }
+  }
+
+  async getSimilarProducts(category_id: string, prd_id: string) {
+    this.similarProducts = await this.productService.getSimilarProducts(
+      category_id,
+      prd_id
+    );
   }
 
   changeMainImage(index: number) {

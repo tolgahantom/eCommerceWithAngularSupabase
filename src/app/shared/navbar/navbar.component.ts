@@ -75,6 +75,7 @@ export class NavbarComponent implements OnInit {
 
   toggleSearch() {
     this.searchQuery = '';
+    this.searchResults = [];
     this.searchOpen = !this.searchOpen;
   }
 }

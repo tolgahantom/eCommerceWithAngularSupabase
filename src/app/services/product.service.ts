@@ -168,4 +168,20 @@ export class ProductService {
 
     return data || [];
   }
+
+  async getSimilarProducts(categoryId: string, excludeProductId: string) {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('category_id', categoryId)
+      .neq('id', excludeProductId)
+      .order('average_rating', { ascending: false })
+      .limit(4);
+
+    if (error) {
+      console.error('Benzer ürünleri çekerken hata:', error);
+      return [];
+    }
+    return data;
+  }
 }

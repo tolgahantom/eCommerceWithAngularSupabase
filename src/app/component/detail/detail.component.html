@@ -66,4 +66,26 @@
     <button class="main-button">Sepete Ekle</button>
   </div>
 </div>
+
+@if (similarProducts.length > 0) {
+<div class="similar-products">
+  <h3>Benzer Ürünler</h3>
+  <div class="products-list">
+    @for (prd of similarProducts; track $index) {
+    <div class="product-card" [routerLink]="['/product', prd.id]">
+      <div class="card-image">
+        <img
+          [src]="prd.images?.[0] || 'https://img.freepik.com/premium-vector/no-photo-available-vector-icon-default-image-symbol-picture-coming-soon-web-site-mobile-app_87543-18055.jpg'"
+        />
+      </div>
+      <div class="card-content">
+        <p class="card-title">{{ prd.name }}</p>
+        <p class="card-price">${{ prd.price }}</p>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}
+
 <app-loader></app-loader>
